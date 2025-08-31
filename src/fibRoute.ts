@@ -1,17 +1,14 @@
-// Endpoint for querying the fibonacci numbers
+// src/fibRoute.ts
+import fibonacci from "./fib"; // matches the default export
 
-import { fibonacci } from "./fib";
+// Example: if using Express
 import { Request, Response } from "express";
 
-export default (req: Request, res: Response): void => {
-  const num: number = parseInt(req.params.num, 10);
+export default (req: Request, res: Response) => {
+    const { num } = req.params;
 
-  const fibN: number = fibonacci(num);
-  let result: string = `fibonacci(${num}) is ${fibN}`;
+    const n = parseInt(num);
+    const fibN = fibonacci(n);
 
-  if (fibN < 0) {
-    result = `fibonacci(${num}) is undefined`;
-  }
-
-  res.send(result);
+    res.send(`fibonacci(${n}) is ${fibN}`);
 };
